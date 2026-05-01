@@ -1,13 +1,303 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>MicroGPT — 极简 GPT 实现</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Welcome to My Portfolio!</h1>
-    <p>This site is hosted on GitHub Pages.</p>
-    <p>Created following the official Quickstart guide.</p>
+
+<!-- Nav -->
+<nav class="nav">
+    <div class="nav-inner">
+        <span class="nav-logo">μGPT</span>
+        <div class="nav-links">
+            <a href="#overview">概述</a>
+            <a href="#features">特性</a>
+            <a href="#components">组件</a>
+            <a href="#quickstart">快速开始</a>
+            <a href="#architecture">架构</a>
+            <a href="#source">源码</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-badge">Pure Python · Zero Dependencies</div>
+        <h1 class="hero-title">MicroGPT</h1>
+        <p class="hero-subtitle">A minimal, dependency-free implementation of a GPT-2 style transformer model in pure Python.</p>
+        <p class="hero-desc">用最少的代码展示训练和推理一个 GPT 所需的全部算法，没有任何外部依赖。</p>
+        <div class="hero-actions">
+            <a href="#quickstart" class="btn-primary">快速开始 →</a>
+            <a href="https://github.com/freedom22-cyber/microgpt" target="_blank" class="btn-secondary">GitHub</a>
+        </div>
+    </div>
+</header>
+
+<!-- Features Grid -->
+<section id="features" class="section">
+    <div class="container">
+        <h2 class="section-title">核心特性</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🐍</div>
+                <h3>纯 Python</h3>
+                <p>无任何 NumPy、PyTorch 等外部依赖，仅使用 Python 标准库</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>完整算法</h3>
+                <p>Tokenization、Autograd、Transformer 架构、训练和推理全包含</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📖</div>
+                <h3>可读性强</h3>
+                <p>代码注释清晰，结构简洁，易于学习理解</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3>教学导向</h3>
+                <p>理想的学习 GPT 内部工作原理的工具</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>可扩展</h3>
+                <p>参数可配置，易于修改 Transformer 层数、维度、头数等</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>确定性</h3>
+                <p>固定随机种子，输出可复现</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Components -->
+<section id="components" class="section section-alt">
+    <div class="container">
+        <h2 class="section-title">核心组件</h2>
+        <div class="components-grid">
+            <div class="component-card">
+                <div class="component-num">01</div>
+                <h3>Tokenizer</h3>
+                <p>将文本字符串转换为整数序列（tokens）。基于唯一字符构建词汇表，支持特殊的序列开始 (BOS) token。</p>
+            </div>
+            <div class="component-card">
+                <div class="component-num">02</div>
+                <h3>自动微分 Autograd</h3>
+                <p>实现完整的反向传播算法。通过计算图进行链式法则计算，<code>Value</code> 类跟踪前向和后向过程。</p>
+            </div>
+            <div class="component-card">
+                <div class="component-num">03</div>
+                <h3>Transformer</h3>
+                <p>单层 Transformer 模型：多头注意力机制、前馈神经网络 (MLP)、RMSNorm 层正则化、ReLU 激活函数。</p>
+            </div>
+            <div class="component-card">
+                <div class="component-num">04</div>
+                <h3>训练 & 推理</h3>
+                <p>交叉熵损失函数用于下一个 token 预测。简单 SGD 优化。训练完成后生成新的序列。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Start -->
+<section id="quickstart" class="section">
+    <div class="container">
+        <h2 class="section-title">快速开始</h2>
+        <div class="quickstart-content">
+            <div class="prereq">
+                <h3>前置要求</h3>
+                <ul>
+                    <li>Python 3.7+</li>
+                    <li>无其他依赖 ✅</li>
+                </ul>
+            </div>
+            <div class="code-block">
+                <div class="code-header">
+                    <span class="code-dots">
+                        <i></i><i></i><i></i>
+                    </span>
+                    <span class="code-lang">bash</span>
+                </div>
+                <pre><code><span class="prompt">$</span> python microgpt.py</code></pre>
+            </div>
+            <div class="steps">
+                <p>程序会自动执行：</p>
+                <div class="step-list">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <div class="step-text">下载示例数据集（常见名字列表）</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <div class="step-text">初始化模型参数</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <div class="step-text">训练模型（~90 秒）</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">4</div>
+                        <div class="step-text">生成 20 个新的示例名字</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Architecture -->
+<section id="architecture" class="section section-alt">
+    <div class="container">
+        <h2 class="section-title">模型架构</h2>
+        <div class="arch-content">
+            <div class="arch-params">
+                <h3>默认配置</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-dots"><i></i><i></i><i></i></span>
+                        <span class="code-lang">python</span>
+                    </div>
+                    <pre><code><span class="comment"># Transformer 超参数</span>
+n_layer    = <span class="num">1</span>     <span class="comment"># Transformer 层数</span>
+n_embd     = <span class="num">16</span>    <span class="comment"># 嵌入维度</span>
+block_size = <span class="num">16</span>    <span class="comment"># 最大上下文长度</span>
+n_head     = <span class="num">4</span>     <span class="comment"># 注意力头数</span></code></pre>
+                </div>
+            </div>
+            <div class="arch-flow">
+                <h3>数据流</h3>
+                <div class="flow-diagram">
+                    <div class="flow-step">输入文本</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step">Tokenizer 编码</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step">Token 嵌入 + 位置编码</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step highlight">Transformer Block</div>
+                    <div class="flow-sub">多头注意力 → MLP → RMSNorm</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step">Logits 输出</div>
+                    <div class="flow-arrow">↓</div>
+                    <div class="flow-step">Softmax → 生成</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Learning Path -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">学习路径</h2>
+        <div class="learning-path">
+            <div class="learn-item">
+                <div class="learn-num">1</div>
+                <div class="learn-content">
+                    <h4>理解 Tokenization</h4>
+                    <p>查看如何将字符串转换为 tokens</p>
+                </div>
+            </div>
+            <div class="learn-item">
+                <div class="learn-num">2</div>
+                <div class="learn-content">
+                    <h4>学习 Autograd</h4>
+                    <p>研究 <code>Value</code> 类如何计算梯度</p>
+                </div>
+            </div>
+            <div class="learn-item">
+                <div class="learn-num">3</div>
+                <div class="learn-content">
+                    <h4>研究 Transformer</h4>
+                    <p>理解注意力机制和前馈网络</p>
+                </div>
+            </div>
+            <div class="learn-item">
+                <div class="learn-num">4</div>
+                <div class="learn-content">
+                    <h4>追踪训练</h4>
+                    <p>观察损失函数如何变化</p>
+                </div>
+            </div>
+            <div class="learn-item">
+                <div class="learn-num">5</div>
+                <div class="learn-content">
+                    <h4>生成文本</h4>
+                    <p>使用训练的模型生成新序列</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Files -->
+<section id="source" class="section section-alt">
+    <div class="container">
+        <h2 class="section-title">文件说明</h2>
+        <div class="files-table">
+            <div class="file-row">
+                <div class="file-name"><code>microgpt.py</code></div>
+                <div class="file-desc">完整的 GPT 模型实现（Tokenizer + Autograd + Transformer + 训练）</div>
+            </div>
+            <div class="file-row">
+                <div class="file-name"><code>microgpt_rl.py</code></div>
+                <div class="file-desc">强化学习扩展版本</div>
+            </div>
+            <div class="file-row">
+                <div class="file-name"><code>input.txt</code></div>
+                <div class="file-desc">输入数据文件（首次运行时自动下载）</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Acknowledgements -->
+<section class="section">
+    <div class="container">
+        <div class="ack-card">
+            <p class="ack-text">灵感来源：<a href="https://github.com/karpathy" target="_blank">Andrej Karpathy</a> 的 makemore 项目</p>
+            <p class="ack-note">这是一个教学项目，用于理解 GPT 的基本原理。对于生产环境，请使用 PyTorch、TensorFlow 或其他优化的框架。</p>
+            <div class="ack-actions">
+                <a href="https://github.com/freedom22-cyber/microgpt" target="_blank" class="btn-primary">查看源码 →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <p>© 2026 MicroGPT · Built with ❤️ and Pure Python</p>
+    </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+});
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+    nav.classList.toggle('nav-scrolled', window.scrollY > 50);
+});
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.feature-card, .component-card, .step, .learn-item, .file-row, .flow-step').forEach(el => {
+    el.classList.add('fade');
+    obs.observe(el);
+});
+</script>
+
 </body>
 </html>
